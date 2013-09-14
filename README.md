@@ -3,8 +3,18 @@ overloaded_function
 
 This library allows to overload different functions into a single function object.
 
+Example
+=========
+```cpp
+int add(int a, int b) { return a+b; }
+double mul(double a, double b){ return a*b; }
+auto func = make_overloaded_function(add, mul);
 
-example
+std::assert(func(2, 2) == 4);
+std::assert(func(2.2, 2.2) == 4.4);
+```
+
+Extended example
 =========
 ```cpp
 
