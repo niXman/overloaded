@@ -8,6 +8,7 @@ Example
 ```cpp
 int add(int a, int b) { return a+b; }
 double mul(double a, double b){ return a*b; }
+
 auto func = make_overloaded_function(add, mul);
 
 std::assert(func(2, 2) == 4);
