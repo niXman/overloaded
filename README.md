@@ -57,10 +57,4 @@ if ( ! func::exists(map, f3) ) {
   std::cout << func::invoke(map2) << std::endl; // 8
 }
 
-// ...
-
-auto map2 = func::insert(map, [](const char *s){std::cout << s << std::endl;});
-if ( func::exists<void(const char*)>(map) )
-  func::invoke(map2, "Hello!");
-
 ```
