@@ -47,6 +47,9 @@
 #include <boost/fusion/sequence/intrinsic/at_key.hpp>
 #include <boost/fusion/include/at_key.hpp>
 
+/*************************************************************************************************/
+// I hope the fix will be accepted in 1.82
+
 #include <boost/version.hpp>
 #if BOOST_VERSION < 108200
 namespace boost {
