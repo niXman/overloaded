@@ -462,6 +462,13 @@ private:
 
 /*************************************************************************************************/
 
+template<typename ...Funcs>
+struct make_overloaded {
+    using type = overloaded_function<typename details::map_generator<Funcs...>::type>;
+};
+
+/*************************************************************************************************/
+
 template<
      typename... Funcs
     ,typename FuncsMap = typename details::map_generator<Funcs...>::type

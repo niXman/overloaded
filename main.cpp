@@ -216,6 +216,41 @@ int main() {
         RT_TEST(6, r);
     }
 
+    // example of how to create and pass an overloaded object into non-template class/functions
+    {
+        using overloaded_type = overloaded::make_overloaded<
+             decltype(&f1)
+            ,decltype(&f2)
+        >::type;
+
+        struct some_class {
+            some_class(overloaded_type &&m)
+                :map{std::move(m)}
+                ,local_f1_cnt{}
+                ,local_f2_cnt{}
+            {}
+
+            void f1() { local_f1_cnt++; return map(); }
+            int f2(int v) { local_f2_cnt++; return map(v); }
+
+            overloaded_type map;
+
+            int local_f1_cnt = 0;
+            int local_f2_cnt = 0;
+        };
+
+        some_class cl{overloaded::make(&f1, &f2)};
+
+        RT_TEST(0, cl.local_f1_cnt);
+        cl.f1();
+        RT_TEST(1, cl.local_f1_cnt);
+
+        RT_TEST(0, cl.local_f2_cnt);
+        auto r = cl.f2(3);
+        RT_TEST(6, r);
+        RT_TEST(1, cl.local_f2_cnt);
+    }
+
     return EXIT_SUCCESS;
 }
 
