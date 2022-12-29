@@ -1,7 +1,7 @@
 overloaded_function
 =========
 
-This library allows to overload different functions into a single function object without any run-time overhead.
+This C++14 library allows to bind different `callable` into a single holder without any run-time overhead.
 
 For the following example:
 ```cpp

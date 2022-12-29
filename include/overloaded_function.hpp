@@ -338,7 +338,7 @@ struct map_generator {
     static_assert(
         boost::fusion::result_of::size<type>::value
             == boost::mpl::size<typename only_unique_sequence<Funcs...>::type>::value
-        ,"only unique signatures are allowed!"
+        ,"only unique signatures is allowed!"
     );
 };
 
