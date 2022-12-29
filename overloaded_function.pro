@@ -11,5 +11,8 @@ QMAKE_CXXFLAGS += \
 SOURCES += \
 	main.cpp
 
+INCLUDEPATH += \
+    include
+
 HEADERS += \
-    overloaded_function.hpp
+    include/overloaded_function.hpp

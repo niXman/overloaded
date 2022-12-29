@@ -73,29 +73,6 @@ namespace details {
 
 /*************************************************************************************************/
 
-template<typename F>
-using has_operator_call_t = decltype(&F::operator());
-
-template<typename F, typename = void>
-struct is_callable : std::false_type
-{};
-
-template<typename...>
-using void_t = void;
-
-template<typename F>
-struct is_callable<
-     F
-    ,void_t<
-        has_operator_call_t<
-            typename std::decay<F>::type
-        >
-    >
-> : std::true_type
-{};
-
-/*************************************************************************************************/
-
 template<typename T, typename RR = typename std::remove_reference<T>::type>
 struct callable_signature
     :callable_signature<
@@ -218,18 +195,18 @@ struct callable_signature<Ret(void)> {
 
 /*************************************************************************************************/
 
-template<bool OK, typename F>
+template<bool OK, typename F, typename Decayed>
 struct callable_holder_real;
 
 // for func pointers/refs
-template<typename F>
-struct callable_holder_real<false, F> {
-    using type = F;
+template<typename F, typename Decayed>
+struct callable_holder_real<false, F, Decayed> {
+    using type = Decayed;
 };
 
 // for any other callable type
-template<typename F>
-struct callable_holder_real<true, F> {
+template<typename F, typename Decayed>
+struct callable_holder_real<true, F, Decayed> {
     using signature = typename callable_signature<F>::signature;
     using std_function_type = std::function<signature>;
     using type = typename std::conditional<
@@ -243,8 +220,9 @@ template<typename F>
 struct callable_holder {
     using decayed = typename std::decay<F>::type;
     using type = typename callable_holder_real<
-         std::is_class<decayed>::value && details::is_callable<decayed>::value
+         std::is_class<decayed>::value
         ,F
+        ,decayed
     >::type;
 };
 
