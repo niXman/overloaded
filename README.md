@@ -32,11 +32,9 @@ int f3(int &v) {v = v*2; return v;}
 int main(int argc, char **) {
     int res = 0;
     auto *fp = &f2;
-    auto o0 = overloaded::make(fp);
-    res += o0(argc);
-
-    auto o1 = overloaded::make(f3);
-    res += o1(argc);
+    auto overloaded = overloaded::make(fp, f3);
+    res += overloaded(argc); // f3()
+    res += overloaded(static_cast<const int &>(argc)); // f2()
 
     return res;
 }
