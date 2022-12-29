@@ -3,6 +3,20 @@ overloaded_function
 
 This C++14 library allows to bind different `callable` into a single holder without any run-time overhead.
 
+Example
+=========
+```cpp
+int add(int a, int b) { return a+b; }
+double mul(double a, double b){ return a*b; }
+
+auto func = overloaded::make(add, mul);
+
+std::assert(func(2, 2) == 4);
+std::assert(func(2.2, 2.2) == 4.84);
+```
+
+Overhead
+=========
 For the following example:
 ```cpp
 /***************************************************************************/
@@ -50,18 +64,4 @@ main:
         add     rsp, 8
         add     eax, edx
         ret
-```
-As far as you can see, there is nothing superfluous!
-
-
-Example
-=========
-```cpp
-int add(int a, int b) { return a+b; }
-double mul(double a, double b){ return a*b; }
-
-auto func = overloaded::make(add, mul);
-
-std::assert(func(2, 2) == 4);
-std::assert(func(2.2, 2.2) == 4.84);
 ```
