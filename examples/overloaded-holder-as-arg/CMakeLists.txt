@@ -16,7 +16,7 @@ include_directories(
 )
 
 set(SOURCES
-    ../../include/overloaded_function.hpp
+    ../../include/overloaded.hpp
     main.cpp
 )
 
