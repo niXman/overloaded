@@ -3,8 +3,8 @@
 //
 // Copyright (c) 2013-2023 niXman (github dot nixman at pm.me)
 //
-// This file is the part of the project 'overloaded_function':
-//       github.com/nixman/overloaded_function
+// This file is the part of the project 'Overloaded':
+//       github.com/nixman/overloaded
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -28,7 +28,7 @@
 #include <iostream>
 #include <cassert>
 
-#include <overloaded_function.hpp>
+#include <overloaded.hpp>
 
 /***************************************************************************/
 
