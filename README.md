@@ -1,4 +1,4 @@
-overloaded_function
+Overloaded
 =========
 
 This C++14 library allows to bind different `callable` into a single holder without any run-time overhead.
