@@ -26,6 +26,7 @@
 #undef NDEBUG
 
 #include <iostream>
+
 #include <cassert>
 
 #include <overloaded.hpp>
@@ -66,9 +67,9 @@ struct callable {
     assert(expected == ((__VA_ARGS__)));
 
 #define CT_TEST(expected, ...) \
+    std::cout << "ct test: \"" << #__VA_ARGS__ " == " #expected "\"..." \
+        << ((expected == (__VA_ARGS__)) ? "done" : "error!") << std::endl; \
     static_assert(expected == (__VA_ARGS__), #__VA_ARGS__ " == " #expected); \
-    std::cout << "ct test: \"" << #__VA_ARGS__ << "\"... " \
-        << ((expected == (__VA_ARGS__)) ? "done" : "error!") << std::endl;
 
 /***************************************************************************/
 
@@ -224,19 +225,19 @@ int main() {
         >::type;
 
         struct some_class {
+            overloaded_type map;
+
             some_class(overloaded_type &&m)
                 :map{std::move(m)}
                 ,local_f1_cnt{}
                 ,local_f2_cnt{}
             {}
 
-            void f1() { local_f1_cnt++; return map(); }
-            int f2(int v) { local_f2_cnt++; return map(v); }
-
-            overloaded_type map;
-
             int local_f1_cnt = 0;
             int local_f2_cnt = 0;
+
+            void f1() { local_f1_cnt++; return map(); }
+            int f2(int v) { local_f2_cnt++; return map(v); }
         };
 
         some_class cl{overloaded::make(&f1, &f2)};

@@ -275,7 +275,7 @@ struct at_key_check_helper<true> {
 template<>
 struct at_key_check_helper<false> {
     template<typename Map, typename F>
-    static bool apply(const Map &, F) { return false; }
+    static bool apply(const Map &, const F &) { return false; }
 };
 
 /*************************************************************************************************/
@@ -355,7 +355,6 @@ FuncsMap create(Funcs &&...funcs) {
             ,typename details::callable_holder<Funcs>::type
         >(std::forward<Funcs>(funcs))...
     };
-
 }
 
 /*************************************************************************************************/
