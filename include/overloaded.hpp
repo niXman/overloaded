@@ -39,8 +39,6 @@
 #include <boost/fusion/include/map.hpp>
 #include <boost/fusion/container/map/map_fwd.hpp>
 #include <boost/fusion/include/map_fwd.hpp>
-#include <boost/fusion/container/map/convert.hpp>
-#include <boost/fusion/include/as_map.hpp>
 #include <boost/fusion/include/pair.hpp>
 #include <boost/fusion/sequence/intrinsic/has_key.hpp>
 #include <boost/fusion/include/has_key.hpp>
